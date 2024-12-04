@@ -25,7 +25,7 @@ class SslpinningPackage : TurboReactPackage() {
         SslpinningModule.NAME,
         false,  // canOverrideExistingModule
         false,  // needsEagerInit
-        true,  // hasConstants
+//        true,  // hasConstants --depreacted
         false,  // isCxxModule
         isTurboModule // isTurboModule
       )
