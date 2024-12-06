@@ -12,11 +12,16 @@ npm install sslpinning
 
 
 ```js
-import { multiply } from 'sslpinning';
+import { fetch } from 'sslpinning';
+
 
 // ...
 
-const result = await multiply(3, 7);
+useEffect(() => {
+    fetch("https://www.dynamicgyms.com/landingpage",{sslPinning:{certs:[""]}})
+    .then(url=>console.log({url}))
+    .catch(err=>{console.error({err})})
+  }, []);
 ```
 
 
