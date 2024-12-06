@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'sslpinning';
+import { fetch } from 'sslpinning';
 
 export default function App() {
   const [result, setResult] = useState<number | undefined>();
 
   useEffect(() => {
-    multiply(3, 7).then(setResult);
+  
+    fetch("https://www.dynamicgyms.com/landingpage",{sslPinning:{certs:[""]}})
+    .then(url=>console.log({url}))
+    .catch(err=>{console.error({err})})
+   
   }, []);
 
   return (

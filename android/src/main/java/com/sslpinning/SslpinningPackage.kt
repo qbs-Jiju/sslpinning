@@ -8,21 +8,16 @@ import com.facebook.react.module.model.ReactModuleInfo
 import java.util.HashMap
 
 class SslpinningPackage : TurboReactPackage() {
-  override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-    return if (name == SslpinningModule.NAME) {
-      SslpinningModule(reactContext)
-    } else {
-      null
-    }
-  }
+  override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? =
+    if (name == RNSslPinningImpl.NAME) SslpinningModule(reactContext) else null
 
   override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
     return ReactModuleInfoProvider {
       val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
       val isTurboModule: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
-      moduleInfos[SslpinningModule.NAME] = ReactModuleInfo(
-        SslpinningModule.NAME,
-        SslpinningModule.NAME,
+      moduleInfos[RNSslPinningImpl.NAME] = ReactModuleInfo(
+        RNSslPinningImpl.NAME,
+        RNSslPinningImpl.NAME,
         false,  // canOverrideExistingModule
         false,  // needsEagerInit
 //        true,  // hasConstants --depreacted

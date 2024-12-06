@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { Cookies, FetchResponse, Options } from './NativeSslpinning';
 
 const LINKING_ERROR =
   `The package 'sslpinning' doesn't seem to be linked. Make sure: \n\n` +
@@ -16,14 +17,33 @@ const SslpinningModule = isTurboModuleEnabled
 const Sslpinning = SslpinningModule
   ? SslpinningModule
   : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
+      },
+    }
+  );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Sslpinning.multiply(a, b);
+export function fetch(
+  url: string,
+  options: Options,
+): Promise<FetchResponse> {
+  return Sslpinning.fetch(url, options);
+}
+
+export function getCookies(
+  domain: string
+): Promise<Cookies> {
+  return Sslpinning.getCookies(
+    domain
+  )
+}
+
+export function removeCookieByName(
+  cookieName: string
+): Promise<void> {
+  return Sslpinning.removeCookieByName(
+    cookieName
+  )
 }

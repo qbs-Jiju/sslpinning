@@ -1,6 +1,9 @@
 package com.sslpinning.Utils
 
-import com.toyberman.BuildConfig
+import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.ReadableMapKeySetIterator
+import com.sslpinning.BuildConfig
+import okhttp3.Request
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -47,11 +50,11 @@ object Utilities {
      * @param map     - map of headers
      * @param builder - request builder, all headers will be added to this request
      */
-    fun addHeadersFromMap(map: ReadableMap, builder: Builder) {
+    fun addHeadersFromMap(map: ReadableMap, builder: Request.Builder) {
         val iterator: ReadableMapKeySetIterator = map.keySetIterator()
         while (iterator.hasNextKey()) {
             val key: String = iterator.nextKey()
-            builder.addHeader(key, map.getString(key))
+            builder.addHeader(key, map.getString(key)!!)
         }
     }
 }
